@@ -199,6 +199,21 @@ Two constraints govern resubmission:
 
 If two entries end up with exactly the same score, the tie goes to the earlier one. That is a small but real reason to get a solid entry submitted promptly instead of polishing in private until the last minute.
 
+### Troubleshooting: the rejections and bundle problems everyone hits once
+
+When something goes wrong, match your symptom to the fix below before you burn another submission:
+
+- **`check` complains the licence is missing or unrecognised.** Your `LICENSE` file is absent, renamed, or a licence the platform does not accept. Put a standard OSI-approved licence (MIT is safest) at the repository root, named exactly `LICENSE`, and commit it.
+- **The bundle contains no sessions for your repository.** You probably ran `bundle` from the wrong folder, or your agent session was opened in a different directory than the repository. Re-open the agent session inside the repo, do a small real edit there so the session is recorded against it, then bundle again from the kit folder with `--repo` pointing at the repo.
+- **`bundle` stops and names a flag.** This is the bundler asking for data your agent's logs do not carry. Supply exactly what it names — commonly `--system-prompt <file>` for the system prompt and `--effort <level>` for the effort setting — rather than guessing at other flags.
+- **"Session predates the bounty" style failures.** The agent session began before the bounty opened. There is no repair for the timestamps; start a fresh session inside the repo now that the bounty is open and rebuild there. This is the most expensive beginner mistake, which is why Step 4 puts it first.
+- **The commit in your submission does not match the repository.** You pushed after noting the SHA, or noted the SHA of a local-only commit. Run `git log --oneline -1` in the pushed repository, confirm that commit exists on GitHub, and submit that exact SHA.
+- **Transcripts do not match the code.** Files appeared in the repo that no bundled session ever touched — usually code pasted in from outside, or work done in a second, unbundled session. Either rebuild the bundle including every session that touched the repo, or redo the outside work inside a proper session in the repo.
+- **The login approval expired.** The `login` command stopped waiting before you approved in the browser. Just run it again and approve promptly; no state is corrupted by an abandoned attempt.
+- **A claim fails with a wallet complaint.** The keypair file you passed does not match the wallet linked on your profile, or no wallet is linked yet. Link the wallet from that keypair on your profile page (Step 1), then claim again with the same file.
+
+A general rule for all of the above: fix one cause, re-run the local `check`, and only resubmit when `check` is clean. Submitting to "see if it passes this time" spends your daily allowance on a coin flip.
+
 ## Step 8 — If you place: claim the reward
 
 When final results are published, placing entrants are notified that a reward is ready. You claim from your profile page, or from the kit using the claim id shown by `status`:
@@ -216,6 +231,48 @@ What to expect during claiming:
 - **Payment itself is USDC on Solana, sent to your own wallet** out of the escrow that was funded before the bounty opened. Verify it arrived in your wallet like you would any other transfer, and keep the claim id with your records.
 
 If a claim fails, read the error, fix the specific thing it names (a wrong keypair file and an unlinked wallet are the usual suspects), and run the claim again. The reward does not evaporate because a first claim attempt errored.
+
+## A worked mini-example: one first entry, start to finish
+
+To make the whole loop concrete, here is the command sequence for a hypothetical first entry — a tiny game bounty with the slug `tiny-game-01`, an entry repository called `my-entry`, and a GitHub user called `<you>`. Your slugs, names, and SHAs will differ; the shape of the sequence will not.
+
+```sh
+# 1. Get the kit and read the rules before touching code
+curl -sSL "https://make.fun/c/tiny-game-01/kit" | tar xz
+cd tiny-game-01-kit
+cat RULES.txt
+
+# 2. Connect the kit to your account (approve the code in your browser)
+node cli/makefun.mjs login --origin https://make.fun
+
+# 3. Create the entry repo next to the kit, AFTER the bounty has opened
+cd ..
+git clone https://github.com/<you>/my-entry.git
+cd my-entry
+#    ... open a FRESH agent session in this folder, copy in the starter
+#    ... if there is one, add a LICENSE, and build the entry here ...
+
+# 4. Measure locally before spending a submission (if the kit offers it)
+cd ../tiny-game-01-kit
+node cli/makefun.mjs grade-local --kit . --bot ../my-entry --driver docker
+#    Improve the entry, re-grade, repeat until the score stops moving.
+
+# 5. Bundle the transcripts and run the platform's own checks
+node cli/makefun.mjs bundle --repo ../my-entry --out transcripts.tar.gz
+node cli/makefun.mjs check --kit . --repo ../my-entry --transcripts transcripts.tar.gz
+
+# 6. Push, note the exact commit, and submit it
+cd ../my-entry && git push && git log --oneline -1   # copy this SHA
+cd ../tiny-game-01-kit
+node cli/makefun.mjs submit --competition tiny-game-01 \
+  --repo-url https://github.com/<you>/my-entry --commit <sha-from-step-6> \
+  --bundle transcripts.tar.gz --keypair ~/.makefun/keypairs/https_make.fun.json
+
+# 7. Follow the entry, and check your remaining daily allowance
+node cli/makefun.mjs status --competition tiny-game-01
+```
+
+Notice what is *not* in that sequence: there is no step where you paste finished code in from somewhere else, no submission before a local check, and no second submission until the first one's status is known. Those three omissions are deliberate — they are where first entries usually go wrong.
 
 ## Habits that separate placing entries from forgettable ones
 
