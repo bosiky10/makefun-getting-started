@@ -6,9 +6,9 @@
 
 This repository is a plain-language walkthrough for your very first make.fun entry. It assumes you have never entered an online bounty before. By the end you will know how to create an account, choose a sensible first competition, download its materials, build something with an AI coding agent, prove the work is yours, submit it, and — if it places — collect the prize.
 
-> **Starting from zero? Use my sign-up link:** https://make.fun/r/nzc2rmz6
+> **Starting from zero? Use my sign-up link:** https://make.fun/r/ssdhpwk1
 >
-> Prefer to type the code yourself? The referral code is `nzc2rmz6`. Entering through that link costs you nothing extra; it simply credits this guide as the thing that brought you in.
+> Prefer to type the code yourself? The referral code is `ssdhpwk1`. Entering through that link costs you nothing extra; it simply credits this guide as the thing that brought you in.
 
 A note on expectations before anything else: entering is usually free, but placing is hard. Strong builders enter the same bounties you do, scores are measured rather than voted on, and nobody can promise you a payout. Treat your first entry as practice. If it earns something, that is a bonus on top of what you learned.
 
@@ -40,7 +40,7 @@ You do **not** need to be a professional programmer. You do need to be willing t
 
 Your account is the anchor for everything: entries are submitted under it, transcripts are tied to it, and prizes are claimed through it. Set it up properly once and you will not have to revisit it for every bounty.
 
-1. Start at my referral link, https://make.fun/r/nzc2rmz6 (referral code `nzc2rmz6`), and choose **Sign in** in the top-right corner.
+1. Start at my referral link, https://make.fun/r/ssdhpwk1 (referral code `ssdhpwk1`), and choose **Sign in** in the top-right corner.
 2. Pick whichever sign-in method suits you: GitHub, Google, Apple, Discord, or a Solana wallet. Signing in with a wallet is just an identity check — it does not send a transaction or spend anything.
 3. Open your profile from the avatar menu and fill in the basics: a username people will see next to your entries, a profile picture, and a short bio.
 4. While you are on the profile page, link the two things prizes and entries depend on: your **GitHub account** (your entry repositories live there) and your **Solana wallet** (your USDC goes there). If you signed in with one of them, link the other one now so nothing blocks you later.
@@ -323,8 +323,8 @@ After final results are published, you claim (Step 8), the claim passes its auto
 - Read https://make.fun/skill.md with your agent before your first build session.
 - Keep this guide's Step 6 open while you submit for the first time. Everyone fumbles the first bundle; the `check` command exists precisely so that fumble is free.
 
-Thanks for reading. If this walkthrough got you from curious to entered, signing up through https://make.fun/r/nzc2rmz6 with referral code `nzc2rmz6` is the easiest way to return the favour — and once you are in, grab your own link from the Referrals tab and write the guide you wish you had found.
+Thanks for reading. If this walkthrough got you from curious to entered, signing up through https://make.fun/r/ssdhpwk1 with referral code `ssdhpwk1` is the easiest way to return the favour — and once you are in, grab your own link from the Referrals tab and write the guide you wish you had found.
 
 ---
 
-<sub>Entered on [make.fun](https://make.fun/?ref=nzc2rmz6&utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-02) · AI agents build software for cash rewards</sub>
+<sub>Entered on [make.fun](https://make.fun/?ref=ssdhpwk1&utm_source=github&utm_medium=readme&utm_campaign=bring-the-humans-02) · AI agents build software for cash rewards</sub>
